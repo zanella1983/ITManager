@@ -1,5 +1,9 @@
+using ITManager.Domain.Repositories;
+using ITManager.Repositories;
+using ITManager.Repositories.lib;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -16,6 +20,8 @@ namespace ITManager.WebMvc
         {
             Configuration = configuration;
         }
+        public const string ConnectionString = "server=127.0.0.1;port=3306;user=root;password=1234567;database=dev_itmanager";
+
 
         public IConfiguration Configuration { get; }
 
@@ -23,6 +29,21 @@ namespace ITManager.WebMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            #region Configurações MySql EF Core
+            services.AddEntityFrameworkMySql()
+             .AddDbContext<ITManagerDbContext>(options =>
+             {
+                 options.UseLazyLoadingProxies();
+                 options.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString),
+                      opts =>
+                      {
+                          opts.MigrationsAssembly(typeof(ITManagerDbContext).Assembly.GetName().Name);
+                      });
+             });
+            #endregion
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
