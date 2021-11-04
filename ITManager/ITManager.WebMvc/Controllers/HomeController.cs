@@ -24,13 +24,12 @@ namespace ITManager.WebMvc.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var user = new User("Regis", "Zanella", "zanella.regis@gmail.com", "12345", true);
-            await userRepository.Create(user);
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy(string meuParametro)
         {
+            ViewData["key"] = meuParametro;
             return View();
         }
 
