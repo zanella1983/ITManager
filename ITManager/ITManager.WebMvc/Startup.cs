@@ -20,7 +20,7 @@ namespace ITManager.WebMvc
         {
             Configuration = configuration;
         }
-        public const string ConnectionString = "server=127.0.0.1;port=3306;user=root;password=1234567;database=dev_itmanager";
+        public const string ConnectionString = "server=127.0.0.1;port=3306;user=root;password=eusoueu;database=dev_itmanager";
 
 
         public IConfiguration Configuration { get; }
