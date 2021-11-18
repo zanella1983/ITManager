@@ -14,5 +14,11 @@ namespace ITManager.Repositories
         public UserRepository(ITManagerDbContext context) : base(context)
         {
         }
+
+        public User GetByEmailAndPassword(string email, string password)
+        {
+            var user = _dbContext.Set<User>().FirstOrDefault(u => u.Email == email && u.Password == password);
+            return user;
+        }
     }
 }

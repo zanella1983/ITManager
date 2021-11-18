@@ -1,3 +1,5 @@
+using ITManager.Application.Services;
+using ITManager.Application.Services.Imp;
 using ITManager.Domain.Repositories;
 using ITManager.Repositories;
 using ITManager.Repositories.lib;
@@ -20,7 +22,7 @@ namespace ITManager.WebMvc
         {
             Configuration = configuration;
         }
-        public const string ConnectionString = "server=127.0.0.1;port=3306;user=root;password=eusoueu;database=dev_itmanager";
+        public const string ConnectionString = "server=127.0.0.1;port=3306;user=root;password=1234567;database=dev_itmanager";
 
 
         public IConfiguration Configuration { get; }
@@ -44,6 +46,7 @@ namespace ITManager.WebMvc
             #endregion
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserService, UserService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
